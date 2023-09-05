@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Message {
+  id String @id @default(uuid()) @map("_id")
+
+  Personality   Personality? @relation(fields: [personalityId], references: [id])
+  personalityId String?
+  sender String
+  content String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Personality {
+  id          String    @id @default(uuid()) @map("_id")
+  name        String
+  age         Int
+  gender      String
+  DOB         DateTime
+  Description String
+  Messages    Message[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
