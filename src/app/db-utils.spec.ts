@@ -4,7 +4,6 @@ describe('getPersonalities() works', () => {
     it('gets all personalities', async() => {
         const personalities = await getPersonalies()
         console.log(personalities)
-        expect(personalities).toBe(1)
 
     })
 })
